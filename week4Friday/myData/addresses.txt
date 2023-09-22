@@ -1,0 +1,3 @@
+person1@gmail.com
+person2@service.com
+person3@yahoo.com

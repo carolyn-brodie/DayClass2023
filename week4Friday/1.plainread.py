@@ -1,6 +1,6 @@
 ##Plain Read - reads entire file and returns a single string
-# #file = open("e:/myData/firstFile.txt", "r")
-# #file = open ("./myData/firstFile.txt", "r")
+#file = open("c:/temp/somefile.txt", "r")
+# file = open("./myData/firstFile.txt", "r")
 # fileString = file.read()
 # file.close()
 # print(fileString)
