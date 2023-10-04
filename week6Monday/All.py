@@ -1,3 +1,5 @@
+#import doctest
+
 ## The all algorithm
 
 ##Start with the assumption that everything has the property
@@ -12,13 +14,22 @@ def findAllTrue(lst, value):
     :param lst: list of numbers
     :param value: integer
     :return: boolean
+    >>> findAllTrue([16,20], 15)
+    True
+    >>> findAllTrue([], 15)
+    True
+    >>> findAllTrue([10, 20], 25)
+    False
     """
     for item in lst:
         if item <= value:
             return False
     return True
 
+
+# if __name__ == '__main__':
+#     doctest.testmod(verbose=True)
 ##Test
 
-theList = [10 , -2, 4, 1, 5]
-print(findAllTrue(theList, 0))
+# theList = [10 , -2, 4, 1, 5]
+# print(findAllTrue(theList, 0))
