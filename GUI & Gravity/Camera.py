@@ -32,6 +32,7 @@ class MyGame(arcade.Window):
 
         # Our Scene Object
         self.scene = None
+        self.score = 0
 
         # Separate variable that holds the player sprite
         self.player_sprite = None
@@ -44,7 +45,15 @@ class MyGame(arcade.Window):
 
         arcade.set_background_color(arcade.csscolor.CORNFLOWER_BLUE)
 
-    def setup(self):
+        self.text_score = arcade.Text(
+            f"Score: {self.score}",
+            start_x=10,
+            start_y=20,
+            color=arcade.color.BLACK,
+            font_size=24,
+        )
+
+    def setup(self, level):
         """Set up the game here. Call this function to restart the game."""
 
         # Set up the Camera
@@ -52,6 +61,7 @@ class MyGame(arcade.Window):
 
         # Initialize Scene
         self.scene = arcade.Scene()
+        self.level =level
 
         # Create the Sprite lists
         self.scene.add_sprite_list("Player")
@@ -63,6 +73,7 @@ class MyGame(arcade.Window):
         self.player_sprite.center_x = 64
         self.player_sprite.center_y = 96
         self.scene.add_sprite("Player", self.player_sprite)
+
 
         # Create the ground
         # This shows using a loop to place multiple sprites horizontally
@@ -117,8 +128,14 @@ class MyGame(arcade.Window):
         # Activate our Camera
         self.camera.use()
 
+
+
         # Draw our Scene
         self.scene.draw()
+
+        # Draw Score
+        self.text_score.draw()
+        super().on_draw()
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed."""
@@ -160,7 +177,10 @@ class MyGame(arcade.Window):
         if self.player_sprite.center_x > 1249:
             self.player_sprite.center_x = 64
             self.player_sprite.center_y = 96
-
+            self.setup(2)
+        elif self.player_sprite.center_x <=20:
+            self.player_sprite.center_x = 64
+            self.player_sprite.center_y = 96
         # Move the player with the physics engine
         self.physics_engine.update()
 
@@ -168,10 +188,18 @@ class MyGame(arcade.Window):
         self.center_camera_to_player()
 
 
+
+        # Update score text
+        self.text_score.text = f"Score: {self.score}"
+        self.text_score.start_x = 50
+
+        super().on_update(delta_time)
+
+
 def main():
     """Main function"""
     window = MyGame()
-    window.setup()
+    window.setup(1)
     arcade.run()
 
 
